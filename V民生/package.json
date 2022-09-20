@@ -1,0 +1,11 @@
+{
+    "id": "lizaoyu-Uploader",
+    "name": "简易图片上传组件",
+    "version": "0.1.2.5",
+    "description": "参考了vant-ui的上传组件更改为uni-app版本",
+    "keywords": [
+        "上传",
+        "组件",
+        "图片上传"
+    ]
+}

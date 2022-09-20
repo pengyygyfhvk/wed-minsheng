@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" href="css/common.css">
+	</head>
+	<style>
+		[v-cloak]{
+		display: none !important;
+	}
+</style>
+	<body>
+		
+		<!-- <div class="h20 bgHeader"></div> -->
+		<div id="app" v-cloak>
+			<div class="header plr15 flex alcenter bgHeader white fixed pt30">
+				<img src="../../static/image/return.png" class="h15 wt15 mr20" @click="goback">
+				<div class="white ft18 bold ">{{symbol}}</div>
+			</div>
+			<div>
+				<div class="pt60 pb10 plr20  bgHeader" style="min-height: 50px;">
+					<div class="flex alcenter between pt5">
+						<div class="tc" :class="[linestate == 'up'?'red':'green']">
+							<p class="bold ft24">{{newprice || '0.00'}}</p>
+							<!-- <p class="mt10">{{updown ||'0.00'}}%</p> -->
+						</div>
+						<div class="w50">
+							<div class="flex between mb5">
+								<span class="blue">{{translatedInfo.high || '--'}}</span>
+								<span class="blue white">{{maxprice || '0.00'}}</span>
+							</div>
+							<div class="flex between mb5">
+								<span class="blue">{{translatedInfo.low || '--'}}</span>
+								<span class="blue white">{{minprice ||'0.00'}}</span>
+							</div>
+							<!-- <div class="flex between">
+								<span class="blue">{{translatedInfo.open || '--'}}</span>
+								<span class="blue white">{{updown || '0.00'}}</span>
+							</div>
+							<div class="flex between">
+								<span class="blue">{{translatedInfo.close || '--'}}</span>
+								<span class="blue white">{{dayvom ||'0.00'}}</span>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div id="tv_chart_container" style="width:100%;height:68vh;margin-top: 5px;"></div>
+				<div class="mt5 pb100  bgHeader">
+					<div class="plr10">
+						<div class="flex alcenter ptb5 ft12">
+							<div class="flex1 ">{{translatedInfo.num || '--'}}</div>
+							<div class="flex1 tc">{{translatedInfo.price || '--'}}</div>
+							<div class="flex1 tr">{{translatedInfo.time || '--'}}</div>
+						</div>
+						<div class="">
+							<div class="flex alcenter ptb5" :class="[item.way==1?'red':'green']" v-for="(item,i) in complete" :key="i">
+								<div class="flex1">{{item.number |fixed4}}</div>
+								<div class="flex1 tc">{{item.price}}</div>
+								<div class="flex1 tr">{{item.time.substr(11)}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex between plr20 alcenter plr20 bgHeader fixed w100 pos_l0b0" style="height: 80px;">
+					<!-- <span>添加自选</span>
+				<img src="./images/collect.png" style="width: 20px;" id="noCollct" v-if="!hasCollcet" @click="triggerCollcet(true)">
+				<img src="./images/collect_active.png" style="width: 20px;"  id="hasCollct" @click="triggerCollcet(false)" v-else > -->
+					<button class="goTranbuy bgGreen flex1 ptb10 mr20 white radius4" @click="goTrade('buy')">{{translatedInfo.buy || '--'}}</button>
+					<button class="goTransell bgRed flex1 ptb10 white radius4" @click="goTrade('sell')">{{translatedInfo.sell || '--'}}</button>
+				</div>
+			</div>
+			<!-- 买入卖出弹窗 -->
+			<div class="pro_mengban" :class="[showbuycont?'glass_mask':'']" >
+				<div class="order-confirm-panel" :class="[showbuycont?'open':'']">
+					<div class="panel-header">
+						<div>
+							{{translatedInfo.ordersure || '--'}}
+							<div class="close"  @click="close">
+								<i class="icon ion-ios-close-empty close_tag">X</i>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="order-detail-view">
+							<div class="order-detail">
+								<div class="row fields">
+									<p>{{translatedInfo.datetime || '--'}}</p>
+								</div>
+								<div class="row" style="width: 100%;overflow-x: auto;">
+									<div v-for="(item,index) in timelist" class="col date ng-binding goodstitle" @click="choosetimes(item.time,item.scale)" :class="[choosetime == item.time?'choose':'']">
+										<p class="daotime">{{translatedInfo.datetime || '--'}}</p>
+										<p class="min"><span class="sec">{{item.time / 60}}</span> {{translatedInfo.min || '--'}}</p>
+										<!-- <p class="profit">{{translatedInfo.profit || '--'}}<span class="pro"> {{item.scale}}%</span></p> -->
+									</div>
+									
+								</div>
+							  
+							</div>
+							<div class="order-detail">
+								<div class="row fields">
+									<p>{{translatedInfo.toumoney || '--'}}</p>
+								</div>
+								<div class="row">
+									<div class="col date ng-binding goodstitle" @click="{{shoushus = 100}}" :class="[shoushus == 100?'choose':'']">
+										<p>100</p>
+									</div>
+									<div class="col date ng-binding goodstitle" @click="{{shoushus = 500}}" :class="[shoushus == 500?'choose':'']">
+										<p>500</p>
+									</div>
+									<div class="col date ng-binding goodstitle" @click="{{shoushus = 1000}}" :class="[shoushus == 1000?'choose':'']">
+										<p>1000</p>
+									</div>
+									<div class="col date ng-binding goodstitle" @click="{{shoushus = 5000}}" :class="[shoushus == 5000?'choose':'']">
+										<p>5000</p>
+									</div>
+									<div class="col date ng-binding goodstitle" @click="{{shoushus = 10000}}" :class="[shoushus == 10000?'choose':'']">
+										<p>10000</p>
+									</div>
+								</div>
+								<label class="other-amount">
+									<input type="number" v-model="shoushu" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" @input ="inputFunc" :placeholder="translatedInfo.placeholder"  id="order_num">
+								</label>
+								<div class="balance ptb5">
+									<div style="font-size:12px;">
+										<span style="float:left;">{{translatedInfo.balance}}：￥{{balance}}</span>
+										<span style="float:right;">{{translatedInfo.sxfee || '--'}}：0%</span>
+										<p style="clear:both;"></p>
+									</div>
+								</div>
+							</div>
+							<div class="order-detail">
+								<div class="row fields">
+									<div class="col">{{translatedInfo.name || '--'}}</div>
+									<div class="col">{{translatedInfo.fang || '--'}}</div>
+									<div class="col">{{translatedInfo.nowprice || '--'}}</div>
+								</div>
+								<div class="row">
+									<div class="col qoute_name ng-binding goodstitle">{{symbol}}</div>
+									<div class="col ng-binding order_type rise" v-if="mytype == 'buy'">{{translatedInfo.buyin || '--'}}</div>
+									<div class="col ng-binding order_type greencolor" v-else>{{translatedInfo.sellout || '--'}}</div>
+									<div class="col ng-binding rise col-nowprice" v-if="mytype == 'buy'">{{newprice || '0.00'}}</div>
+									<div class="col ng-binding col-nowprice greencolor" v-else>{{newprice || '0.00'}}</div>
+								   <!-- <div class="col ng-binding" id="money"> ￥400</div>-->
+								</div>
+							  
+							</div>
+						</div>
+						<div class="order-detail-view">
+							<div class="order-detail">
+							   
+								<div class="row btn_confirm">
+									<div class="col">
+										<button class="button" @click="addorder()">
+											{{translatedInfo.sure || '--'}}
+										</button>
+									</div>
+								</div>
+							   <p class="expect_profit">
+									<span class="ng-binding">{{translatedInfo.yupro || '--'}} :  ￥<span id="yuqi">{{shoushus+shoushus*scale/100}}</span></span>
+									<!-- &nbsp;&nbsp;
+									<span class="ng-binding">{{translatedInfo.baomoney || '--'}} :  $<span id="baodi">0.00</span></span> -->
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pro_mengban" :class="[showcont?'glass_mask':'']" >
+				<div class="order-confirm-panel" :class="[showcont?'open':'']">
+					<div class="orders">
+						<div>
+							<div class="orders-list">
+								<p class="sybol ptb10">{{symbol}}</p>
+								
+								<div class="mt10">
+									
+									
+									<div class="time-graph">
+										<div class="big">
+											<p class="time">{{choosetime}}</p>
+											<p class="price">{{translatedInfo.nowprice}}</p>
+											<p class="newprice">{{newprice || '0.00'}}</p>
+										</div>
+										<div class="big_canvas">
+											<canvas id="big-graph-canvas" width="200" height="200" />
+										</div>
+									</div>
+								</div>
+							
+								<div class="dao mt10 ptb10">
+									<ul class="row daoul">
+										<li class="col">
+											<p class="daotop">{{translatedInfo.fang}}</p>
+											<p class="daodetail" :class="[mytype == 'buy'?'redcolor':'greencolor']">{{ mytype == 'buy' ? translatedInfo.buyin : translatedInfo.sellout }}</p>
+										</li>
+										<li class="col">
+											<p class="daotop">{{translatedInfo.num}}</p>
+											<p class="daodetail">￥{{shoushu}}</p>
+										</li>
+										<li class="col">
+											<p class="daotop">{{translatedInfo.zhi}}</p>
+											<p class="daodetail">￥{{buyend_price}}</p>
+										</li>
+										<li class="col">
+											<p class="daotop">{{translatedInfo.result}}</p>
+											<p v-if="mytype == 'buy' && (buyend_price -0) > (newprice -0)" class="daodetail redcolor">
+												-{{(shoushu * buyloss -0) /100 || '0' | toFixedNum}}</p>
+											<p v-if="mytype == 'buy' && (buyend_price -0) < (newprice -0)" class="daodetail greencolor">
+												+{{(shoushu * buyloss -0) /100 || '0.00' | toFixedNum}}</p>
+											<p v-if="mytype == 'buy' && (buyend_price -0) == (newprice -0)" class="daodetail greencolor">
+													0</p>
+											<p v-if="mytype !== 'buy' && (buyend_price -0) > (newprice -0)" class="daodetail greencolor">
+												+{{(shoushu * buyloss -0) /100 || '0.00' | toFixedNum}}</p>
+											<p v-if="mytype !== 'buy' && (buyend_price -0) < (newprice -0)" class="daodetail redcolor">
+												-{{(shoushu * buyloss -0) /100 || '0.00' | toFixedNum}}</p>
+											<p v-if="mytype !== 'buy' && (buyend_price -0) == (newprice -0)" class="daodetail redcolor">
+												0</p>
+											
+										</li>
+									</ul>
+								</div>
+								<div>
+									<p class="continue" @click="close">{{translatedInfo.continue}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pro_mengban" :class="[showdonecont?'glass_mask':'']" >
+				<div class="order-confirm-panel" :class="[showdonecont?'open':'']">
+					<div class="orders">
+							<div>
+								<div class="">
+									<p class="sybol ptb10">{{symbol}}</p>
+									
+									<div class="mt10">
+										
+										<div class="time-graph">
+											<div class="bigs">
+												<p class="time" v-show="pingstatus == 1" :class="{ greencolor: parseFloat(pingprofit_ratio) < 0, redcolor: parseFloat(pingprofit_ratio) >= 0 || pingprofit_ratio == '' }">{{ pingprofit_ratio > 0 ? '+' : '' }}{{pingprofit_ratio}}</p>
+												<p>{{ pingstatus == 1 ? translatedInfo.jiesuandone : translatedInfo.jiesuanimg }}</p>
+											</div>
+											
+										</div>
+									</div>
+								
+									<div class="dao mt10 ptb10">
+										<ul class="row daoul">
+											<li class="col">
+												<p class="daotop">{{translatedInfo.fang}}</p>
+												<p class="daodetail" :class="[mytype == 'buy'?'greencolor':'redcolor']">{{ mytype == 'buy' ? translatedInfo.buyin : translatedInfo.sellout }}</p>
+											</li>
+											<li class="col">
+												<p class="daotop">{{translatedInfo.num}}</p>
+												<p class="daodetail">￥{{pingnumber}}</p>
+											</li>
+											<li class="col">
+												<p class="daotop">{{translatedInfo.zhi}}</p>
+												<p class="daodetail">￥{{pingend_price}}</p>
+											</li>
+											<li class="col">
+												<p class="daotop">{{translatedInfo.result}}</p>
+												<p class="daodetail" :class="{ greencolor: parseFloat(pingprofit_ratio) < 0, redcolor: parseFloat(pingprofit_ratio) >= 0 || pingprofit_ratio == '' }">{{ pingprofit_ratio > 0 ? '+' : '' }}{{pingprofit_ratio}}</p>
+											</li>
+										</ul>
+									</div>
+									<div>
+										<p class="continue" @click="close">{{translatedInfo.continue}}</p>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+		<script src="lib/vue.min.js"></script>
+
+		<script src="lib/jquery.js"></script>
+		<!-- <script src="javascripts/jquery.cookie.js"></script> -->
+		<script src="lib/layer_mobile/layer.js"></script>
+		<script src="javascripts/main.js"></script>
+		<!-- <script src="javascripts/socket.io.js"></script> -->
+		<script src="tradeview/charting_library/charting_library.min.js"></script>
+		
+		<script>			
+			document.addEventListener('UniAppJSBridgeReady', function() {
+				
+				// document.querySelector('.btn-list').addEventListener('click', function(evt) {
+				// 	uni.navigateBack({
+				// 		delta: 1
+				// 	});
+				// });
+				var vm = new Vue({
+					el: '#app',
+					data: {
+						widget: null,
+						symbolInfo: null,
+						feed: null,
+						wsEx: null,
+						scale:0,
+						ws: null,
+						lists: [],
+						newData: '',
+						symbol: '',
+						priceScale: 100000,
+						histime: '',
+						newprice: '0.00',
+						updown: '0.00',
+						maxprice: '0.00',
+						minprice: '0.00',
+						dayvom: '0.00',
+						currencyList: [],
+						couponSelected: '',
+						legal_id: '',
+						currency_id: '',
+						legal_name: '',
+						currency_name: '',
+						hasCollcet: '',
+						myid: '',
+						balance: '',
+						rates: '',
+						// websockUrl: 'wss://www.hsfuture.net/ws',
+						// url: 'http://www.hsfuture.net/',
+						websockUrl: 'wss://'+_HOST+'/ws',
+						url: _DOMAIN+'/',
+						complete: [],
+						transwords: {
+							zh: {
+								high: '高',
+								low: '低',
+								open: '开',
+								close: '收',
+								num: '数量',
+								price: '价格',
+								time: '时间',
+								buy: '买涨',
+								sell: '买跌',
+								ordersure: '订单确认',
+								name: '名称',
+								fang: '方向',
+								nowprice: '现价',
+								shou: '下单手数',
+								buymoney: '购买金额',
+								balance: '余额',
+								sure: '确认下单',
+								buyin: '买涨',
+								sellout: '买跌',
+								jiesuandone:'结算完成',
+								jiesuanimg:'结算中',
+								fang:'方向',
+								zhi:'执行价',
+								result:'预测结果',
+								continue:'继续',
+								placeholder:'请输入自定义数量',
+								sxfee:'手续费',
+								datetime:'到期时间',
+								profit:'收益',
+								toumoney:'投资金额',
+								yupro:'预期收益',
+								baomoney:'保底金额',
+								min:'分钟'
+								
+							},
+							en: {
+								high: 'high',
+								low: 'low',
+								open: 'open',
+								close: 'close',
+								num: 'number',
+								price: 'price',
+								time: 'time',
+								buy: 'buy',
+								sell: 'sell',
+								ordersure: 'Order Confirmation',
+								name: 'name',
+								fang: 'direction',
+								nowprice: 'Current price',
+								shou: 'Order lot',
+								buymoney: 'purchasing price',
+								balance: 'Balance',
+								sure: 'Confirm order',
+								buyin: 'Buy up',
+								sellout: 'Buy or sell',
+								jiesuandone:'Settlement complete',
+								jiesuanimg:'Settlement',
+								zhi:'Strike price',
+								result:'forecast result',
+								continue:'continue',
+								placeholder:'Please enter a custom quantity',
+								sxfee:'Handling fee',
+								datetime:'Expire date',
+								profit:'income',
+								toumoney:'investment amount',
+								yupro:'expected profits',
+								baomoney:'Guaranteed amount',
+								min:'minute'
+							},
+							hk: {
+								high: '高',
+								low: '低',
+								volume: '24H量',
+								num: '數量',
+								price: '價格',
+								time: '時間',
+								buy: '買入',
+								sell: '賣出',
+								ordersure: '订单确认',
+								name: '名称',
+								fang: '方向',
+								nowprice: '现价',
+								shou: '下单手数',
+								buymoney: '购买金额',
+								balance: '余额',
+								sure: '确认下单',
+								buyin: '买涨',
+								sellout: '买跌',
+								jiesuandone:'结算完成',
+								jiesuanimg:'结算中',
+								fang:'方向',
+								zhi:'执行价',
+								result:'预测结果',
+								continue:'继续',
+								placeholder:'请输入自定义数量',
+								sxfee:'手續費',
+								datetime:'到期時間',
+								profit:'收益',
+								toumoney:'投資金額',
+								yupro:'預期收益',
+								baomoney:'保底金額',
+								min:'分鐘'
+							},
+							jp: {
+								high: '高さ',
+								low: '低い',
+								volume: '24 h量',
+								num: '数',
+								price: '価格',
+								time: '時間',
+								buy: '購入',
+								sell: '売却',
+								ordersure: '注文確認',
+								name: '名前',
+								fang: '方向',
+								nowprice: '現在の価格',
+								shou: '注文ロット',
+								buymoney: '購入価格',
+								balance: 'バランス',
+								sure: '注文を確認する',
+								buyin: '買い占めます',
+								sellout: '購入または販売',
+								jiesuandone:'決済完了',
+								jiesuanimg:'決済',
+								zhi:'行使価格 ',
+								result:'予測結果',
+								placeholder:'カスタム数量を入力してください',
+								sxfee:'취급 수수료',
+								datetime:'만료 시간',
+								profit:'이익',
+								toumoney:'투자금액',
+								yupro: '예상 복귀',
+								baomoney: '보증 금액',
+								min:'분',
+								continue:'계속'
+							},
+							kor:{
+								high : '높음',
+								low : '낮음',
+								volume : '24H 볼륨',
+								num : '숫자',
+								price : '가격',
+								time : '시간',
+								buy : '구매',
+								sell : '매도',
+								ordersure: '주문 확인',
+								name: '이름',
+								fang:'방향',
+								nowprice:'현재 가격',
+								shou: '주문 건수',
+								buymoney: '구매 금액',
+								balance:'균형',
+								sure: '주문 확인',
+								buyin: '구매',
+								sellout: '구매 다운',
+								jiesuandone:'결제 완료',
+								jiesuanimg: '결제 진행 중',
+								zhi:'실행 가격',
+								result: '예상 결과',
+								placeholder: '맞춤 수량을 입력하십시오', 
+								sxfee:'취급 수수료',
+								datetime:'만료 시간',
+								profit:'이익',
+								toumoney:'투자금액',
+								yupro: '예상 복귀',
+								baomoney: '보증 금액',
+								min:'분' ,
+								continue:'계속'
+							},
+							th:{
+								high:"โด่ง",
+								low:"หดหู่ใจ",
+								volume:"ปริมาณ",
+								num:"จำนวนรวม",
+								price:"ราคา",
+								time:"กาละ",
+								buy:"ซื้อ",
+								sell:"ขาย"
+							},
+							de:{
+								high:"hoch",
+								low:"niedrig",
+								volume:"24h Volumen",
+								num:"Anzahl",
+								price:"Preis",
+								time:"Zeit",
+								buy:"Kauf",
+								sell:"Verkauf aus"
+							},
+							fra:{
+								high:"Élevé",
+								low:"Faible",
+								volume:"Quantité 24h",
+								num:"Nombre",
+								price:"Prix",
+								time:"Temps",
+								buy:"Acheter",
+								sell:"Vendre"
+							},
+							hi:{
+								high:"उच्च",
+								low:"कम",
+								volume:"24H मात्रा",
+								num:"मात्रा",
+								price:"कीमत",
+								time:"समय",
+								buy:"खरीदना",
+								sell:"बेचना"
+							},
+							id:{
+								high:"tinggi",
+								low:"rendah",
+								volume:"Volume 24 jam",
+								num:"Kuantitas",
+								price:"harga",
+								time:"waktu",
+								buy:"Membeli di",
+								sell:"Menjual"
+							},
+							pt:{
+								high:"Alto",
+								low:"Baixo",
+								volume:"24h volume",
+								num:"Número",
+								price:"Preço",
+								time:"Tempo",
+								buy:"Compra",
+								sell:"Vender fora"
+							},
+							ru:{
+								high:"высота",
+								low:"низкий",
+								volume:"24H количество",
+								num:"количество",
+								price:"цена",
+								time:"время",
+								buy:"покупать",
+								sell:"продать"
+							},
+							spa:{
+								high:"Alto",
+								low:"Baja",
+								volume:"Cantidad de 24h",
+								num:"Cantidad",
+								price:"Precio",
+								time:"Tiempo",
+								buy:"Comprar",
+								sell:"Vender"
+							}
+						},
+						translatedInfo: {},
+						lang: '',
+						showbuycont:false,
+						showcont:false,
+						showdonecont:false,
+						amount:0,
+						shoushus:100,
+						shoushu:'',
+						mytype:'buy',
+						linestate:'up',
+						interval:15,
+						choosetime:'',
+						buytype:'',
+						buytypename:'',
+						buynumber:'',
+						buyend_price:'',
+						buyprofit_ratio:'',
+						buyoid:'',
+						buyloss:'',
+						pingtype:'',
+						pingtypename:'',
+						pingnumber:'',
+						pingend_price:'',
+						pingprofit_ratio:'',
+						pingoid:'',
+						pingstatus:'',
+						timelist:{}
+					},
+					filters:{
+						fixed4:function(vals){
+							var values = iTofixed(vals,4);
+							return values;
+						}
+					},
+					created() {
+						var that = this;
+						if(window.plus){	
+							setTimeout(()=>{
+								plus.navigator.setStatusBarStyle('light');
+							},300)	
+							that.lang = plus.storage.getItem('lang') || 'en';
+							
+						}else{
+							// that.lang = JSON.parse(localStorage.getItem('lang')).data;
+							that.lang = localStorage.getItem('lang') || 'en';
+						}
+						
+						var paramsed = get_all_params();
+						that.symbol = paramsed.symbol;
+						let c_name = paramsed.symbol.split('/')
+						that.legal_name = c_name[1];
+						that.currency_name = c_name[0];
+						that.legal_id = paramsed.legal_id;
+						that.currency_id = paramsed.currency_id;
+						// console.log(that.$t('market.volume'));
+						that.translatedInfo = that.transwords[that.lang];
+						
+						document.title = that.symbol;
+						if(window.plus){							
+							if (!plus.storage.getItem('token')) {
+								uni.navigateTo({
+									url: '/pages/mine/login',
+							
+								});
+							}
+						}else{
+							if (localStorage.getItem('token') == null || localStorage.getItem('token') == '') {
+								uni.navigateTo({
+									url: '/pages/mine/login',
+								});
+							}
+							
+						}
+						
+						this.gettopdata();
+						this.getprorate();
+					},
+					computed: {
+						listenState() { //监听交易对
+							return this.symbol;
+						}
+					},
+					watch: {
+						listenState: function(a, b) { //监听交易对
+							if (a != b && b != '') {
+								this.widget.setSymbol(a, localStorage.getItem('tim'), function onReadyCallback() {}) //切换币种
+							}
+						}
+					},
+					mounted() {
+						this.createWidget();
+						// this.getComplete();
+						// this.quotation();
+						
+					},
+					destroyed() {
+						this.removeWidget();
+					},
+					beforeDestroy() {
+
+					},
+					methods: {
+						choosetimes(times,scale){
+							this.choosetime = times;
+							this.scale = scale;
+						},
+						addorder(){
+							var that=this;
+							otype = 0 ;
+							if(that.mytype !== 'buy'){
+								otype = 1
+							}
+							
+							if (!that.shoushu) {
+								if(!that.shoushus){
+									layer_msg('投资金额不能为空');
+									return false;
+								}else{
+									that.shoushu = that.shoushus;
+								}
+								
+							}
+							initDataToken({ 
+								url: 'position/addorder', 
+								data: { 
+									order_type : otype ,
+									order_pid : that.legal_id ,
+									order_price : that.shoushu , 
+									order_time : that.choosetime , 
+								}, 
+								type: 'POST' ,
+							}, res => {
+								
+								that.showbuycont = false;
+								that.showcont = true;
+								that.buyoid = res.data.oid;
+								that.buyend_price = Number(res.data.buyprice).toFixed(4) ;
+								that.buyprofit_ratio = res.data.sx_fee;
+								that.buyloss = res.data.endloss;
+								var big_canvas = document.getElementById('big-graph-canvas')
+								that.drawMain(big_canvas, 100, 1, '#435377','#c3231c',that.choosetime)
+								
+							})
+							
+						},
+						
+						drawMain(drawing_elem, percent, colornums, bgcolor,forecolor,seconds) {
+						  /*
+							@drawing_elem: 绘制对象
+							@percent：绘制圆环百分比, 范围[0, 100]
+							@forecolor: 绘制圆环的前景色，颜色代码
+							@bgcolor: 绘制圆环的背景色，颜色代码
+						*/
+						  var that=this;
+							
+						  var context = drawing_elem.getContext('2d')
+						  var center_x = drawing_elem.width / 2
+						  var center_y = drawing_elem.height / 2
+						  var rad = (Math.PI * 2) / seconds
+						  var speed = seconds
+						  // 绘制背景圆圈
+						  function backgroundCircle() {
+							context.save()
+							context.beginPath()
+							context.lineWidth = 2 // 设置线宽
+							var radius = center_x - context.lineWidth
+							context.lineCap = 'round'
+							context.strokeStyle = bgcolor
+							context.arc(center_x, center_y, radius, 0, Math.PI * 2, false)
+							context.stroke()
+							context.closePath()
+							context.restore()
+						  }
+											
+						  // 绘制运动圆环
+						  function foregroundCircle(n) {
+							
+							
+							context.save()
+							// context.strokeStyle = forecolor //决定圆环颜色
+							context.lineWidth = 3
+							context.lineCap = 'round'
+							var radius = center_x - context.lineWidth
+							context.beginPath()
+							if (colornums == 1) {
+							  var g = context.createLinearGradient(0, 0, 180, 0) // 创建渐变对象  渐变开始点和渐变结束点
+							  g.addColorStop(0,forecolor) // 添加颜色点
+							  g.addColorStop(1,forecolor) // 添加颜色点
+							  context.strokeStyle = g // 使用渐变对象作为圆环的颜色
+							}
+							
+							context.arc(
+							  center_x,
+							  center_y,
+							  radius,
+							  -Math.PI / 2,
+							  -Math.PI / 2 + n * rad,
+							  false
+							) // 用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+							context.stroke()
+							context.closePath()
+							context.restore()
+						  }
+											
+						  // 绘制文字
+						  function text(n) {
+							// context.save() // save和restore可以保证样式属性只运用于该段canvas元素
+							// context.fillStyle = forecolor
+							// var font_size = 40
+							// context.font = font_size + 'px Helvetica'
+							// var text_width = context.measureText(n.toFixed(0) + '%').width
+							// context.fillText(n.toFixed(0), center_x - text_width / 2, center_y + font_size / 2)
+							// context.restore()
+						  }
+						  
+						var total_times = seconds;                          // 游戏总时间
+						var cntd = total_times
+						// 运行的线段
+						var startAngle = -0.5 * Math.PI               // 开始角度   
+						var endAngle = -2.5 * Math.PI                 // 结束角度
+						drawFrame(speed)
+						console.log(speed * rad)
+						let circle
+						clearInterval(circle)
+						that.circle = setInterval(() => {
+						    
+						    //  逆时针运行，角度不断增加
+						    endAngle += 2 * Math.PI / total_times
+						    speed --
+							drawFrame(speed)
+							that.choosetime = speed;
+							
+						    // 刚好一个圆，停止canvas
+						    if (speed == 0 ) {
+						        clearInterval(that.circle)
+								getdetails();
+						    }
+						}, 1000)
+						
+							
+						function getdetails(){
+							initDataToken({
+								url: 'position/orderdetails',
+								data: {
+									oid: that.buyoid,
+								},
+								type: 'post'
+							}, function (res) {
+								
+								if(res.data.ostaus == 1){
+									that.pingstatus = res.data.ostaus;
+									that.pingprofit_ratio = res.data.ploss;
+									that.pingnumber = res.data.fee;
+									that.pingend_price = res.data.sellprice;
+									that.showcont = false;
+									that.showdonecont = true;
+									console.log(9999)
+								}else{
+									getdetails();
+								}
+								
+								
+							})
+								
+						}
+											
+						  // 执行动画
+						  function drawFrame(speed) {
+							  
+							// if (speed <= percent) {
+							//   window.requestAnimationFrame(drawFrame)
+							// } else {
+							//   return false
+							// }
+							context.clearRect(0, 0, drawing_elem.width, drawing_elem.height)
+							backgroundCircle()
+							text(speed)
+							foregroundCircle(speed)
+						  }
+						  
+						 
+						},
+						
+						getprorate() {
+							initDataToken({ url: 'position/getProRate', data: { pid : this.legal_id }, type: 'POST' }, res => {
+								
+								this.timelist = res.data;
+								this.choosetime = res.data[0]['time'];
+								this.scale = res.data[0]['scale'];
+							})
+							
+						},
+						gettopdata() {
+							initDataToken({ url: 'home/ajaxpro', data: { pid : this.legal_id }, type: 'POST' }, res => {
+								
+								this.newprice = res.data.Price;
+								this.updown = res.data.Open;
+								this.minprice = res.data.Low;
+								this.maxprice = res.data.High;
+								this.dayvom = res.data.Close;
+								this.linestate = res.data.state;
+								
+							})
+							
+						},
+						
+						getuserinfo() {
+							initDataToken({ url: 'member/getUserInfo',  type: 'get' }, res => {
+								
+								this.balance = res.data.usermoney;
+								console.log(this.balance)
+							})
+							
+						},
+						
+						inputFunc: function (event) {
+							
+							if(event){
+							    this.shoushu = event.currentTarget.value;
+								this.amount = Number(this.shoushu * this.newprice).toFixed(4);
+							}
+							
+						},
+						show(){
+							this.showbuycont = true;
+							
+						},
+						close:function(){
+							this.showbuycont = false;
+							this.showcont = false;
+							this.showdonecont = false;
+							clearInterval(this.circle)
+						},
+						goback() {
+							if(window.plus){
+								uni.navigateBack({
+									delta: 1
+								});
+							}else{
+								history.back(-1);
+							}
+						},
+						goTrade(mytype) {
+							
+							this.showbuycont = true;
+							this.mytype = mytype;
+							this.shoushu = '';
+							this.amount = 0.00;
+							this.getuserinfo();
+						
+						},
+						
+						timestampToTime(timestamp) {
+					// 		var time=''
+					// 		if(timestamp.length>11){
+					// 			time=timestamp
+					// 		}else{
+					// 			time=timestamp*1000
+					// 		}
+					// 		var now = new Date(time),
+					//  　　	y = now.getFullYear(),
+					//  　　	m = now.getMonth() + 1,
+					// 　　	d = now.getDate();
+					//  　　	return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8);
+						    var time=''
+							if(timestamp.toString().length>11){
+							  time=timestamp
+							}else{
+							  time=timestamp*1000
+							}
+					        var date = new Date(time); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+							var Y = date.getFullYear() + '-';
+							var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+							var D = date.getDate() >= 10 ? date.getDate() + ' ' : ('0' + date.getDate()) + ' ';
+							var h = date.getHours() >= 10 ? date.getHours() + ':' : ('0' + date.getHours()) + ':';
+							var m = date.getMinutes() >= 10 ? date.getMinutes() + ':' : ('0' + date.getMinutes()) + ':';
+							var s = date.getSeconds() >= 10 ? date.getSeconds() : ('0' + date.getSeconds());
+							return Y + M + D + h + m + s;
+						},
+
+						// 默认
+						connect(real) { //封装推送数据
+							console.log(real);
+							console.log('15555')
+							var that = this, tokens='';
+							if(window.plus){
+								if (plus.storage.getItem('uid')) {
+									tokens=JSON.parse(plus.storage.getItem('uid')).data
+								}
+							}else{
+								if(localStorage.getItem('uid')){
+									tokens = JSON.parse(localStorage.getItem('uid')).data;
+								}								
+							}	
+							that.timer=setInterval(()=>{
+								$.ajax({
+									url: that.url + 'api/home/ajaxpro',
+									data:{
+										pid:that.legal_id
+									},
+									type: 'post',
+									success: function(res) {
+										var newdata = res.data;
+										
+										if (res.code == 200) {
+											let obj = {}
+											var types = localStorage.getItem('type');
+											obj.close = Number(newdata.Price)
+											obj.open = Number(newdata.Open)
+											obj.low = Number(newdata.Low)
+											obj.high = Number(newdata.High)
+							
+											// obj.volume = Number(newdata.Close)
+											obj.time = newdata.UpdateTime*1000
+										
+											that.newprice = newdata.Price;
+											that.amount = Number(that.shoushu * that.newprice).toFixed(4);
+											console.log(obj)
+											console.log(111)
+											real(obj)
+											
+											
+											that.newprice = newdata.Price;
+											that.updown = newdata.Open;
+											that.minprice = newdata.Low;
+											that.maxprice = newdata.High;
+											that.dayvom = newdata.Close;
+											that.linestate = newdata.state;
+											
+										}
+										
+									}
+								})
+							},3000)
+						},
+						// 币币交易全站交易WebSocket
+						completeSocket() { //封装推送数据
+							var that = this,tokens='';
+							if(window.plus){
+								if (plus.storage.getItem('uid')) {
+									tokens=JSON.parse(plus.storage.getItem('uid')).data
+								}
+							}else{
+								if(localStorage.getItem('uid')){
+									tokens = JSON.parse(localStorage.getItem('uid')).data;
+								}								
+							}
+						
+							var socket = io(socket_api);
+							  socket.emit("login",tokens);
+							  socket.on("match_trade", msg=> {
+								if (msg.type == "match_trade") {
+								  if(that.legal_id ==  msg.legal_id && that.currency_id == msg.currency_id){
+									var times = that.timestampToTime(msg.data[0].ts)
+									var way;
+									msg.data[0].direction == 'buy' ? way=1 : way=2;
+									var data ={
+									  price: msg.data[0].price,
+									  time: times,
+									  number: msg.data[0].amount,
+									  way: way
+									}
+									that.complete.unshift(data)
+									if(that.complete.length >20){
+									  that.complete.pop()
+									}
+								  }		
+								}
+							  });
+						},
+						createWidget() {
+							let _this = this;
+							let feed = _this.createFeed();
+							
+							this.$nextTick(function() {
+								
+								let widget = _this.widget = new TradingView.widget({
+									symbol: _this.symbol,
+									interval: 1,
+									debug: true,
+									fullscreen: false,
+									autosize: true,
+									container_id: "tv_chart_container",
+									// datafeed: new Datafeeds.UDFCompatibleDatafeed("http://demo_feed.tradingview.com"),
+									datafeed: feed,
+									library_path: "tradeview/charting_library/",
+									custom_css_url: 'bundles/new.css',
+									locale: _this.lang,
+									width: "100%",
+									height: 516,
+									drawings_access: {
+										type: 'black',
+										tools: [{
+											name: "Regression Trend"
+										}]
+									},
+									disabled_features: [ //  禁用的功能
+										'left_toolbar', 'widget_logo', 'header_saveload', 'compare_symbol', 'display_market_status',
+										'go_to_date', 'header_chart_type', 'header_compare', 'header_interval_dialog_button',
+										'header_resolutions', 'header_screenshot', 'header_symbol_search', 'header_undo_redo',
+										'legend_context_menu', 'show_hide_button_in_legend', 'show_interval_dialog_on_key_press',
+										'snapshot_trading_drawings', 'symbol_info', 'timeframes_toolbar', 'use_localstorage_for_settings',
+										'volume_force_overlay','context_menus'
+									],
+									enabled_features: [ //  启用的功能（备注：disable_resolution_rebuild 功能用于控制当时间范围为1个月时，日期刻度是否都是每个月1号
+										'dont_show_boolean_study_arguments', 'hide_last_na_study_output', 'move_logo_to_main_pane',
+										'same_data_requery', 'side_toolbar_in_fullscreen_mode', 'disable_resolution_rebuild'
+									],
+									charts_storage_url: 'http://saveload.tradingview.com',
+									charts_storage_api_version: "1.1",
+									toolbar_bg: "transparent",
+									timezone: "Asia/Shanghai",
+									studies_overrides: {
+										'volume.precision': '1000'
+									},
+									overrides: _this.overrides()
+								});
+
+								widget.MAStudies = [];
+								widget.selectedIntervalButton = null;
+								// widget.setLanguage('en')
+								widget.onChartReady(function() { //图表方法
+									// document.getElementById('trade-view').childNodes[0].setAttribute('style', 'display:block;width:100%;height:100%;');
+									//let that =this
+
+									widget.chart().createStudy('Moving Average', false, true, [15, 'close', 0], null, {
+										'Plot.color': '#e843da'
+									});
+									widget.chart().createStudy("MA Cross", false, false, [10, 20]);
+
+									let buttonArr = [{
+											value: "1min",
+											period: "1",
+											text: "Time",
+											chartType: 3,
+											type: "1min"
+										},
+										{
+											value: "1",
+											period: "1m",
+											text: "1min",
+											chartType: 1,
+											type: "1min"
+										},
+										{
+											value: "5",
+											period: "5m",
+											text: "5min",
+											chartType: 1,
+											type: "5min"
+										},
+										{
+											value: "15",
+											period: "15m",
+											text: "15min",
+											chartType: 1,
+											type: "15min"
+										},
+										{
+											value: "30",
+											period: "30m",
+											text: "30min",
+											chartType: 1,
+											type: "30min"
+										},
+										{
+											value: "60",
+											period: "60分钟",
+											text: "1hour",
+											chartType: 1,
+											type: "60min"
+										},
+										{
+											value: "1D",
+											period: "1D",
+											text: "1day",
+											chartType: 1,
+											type: "1day"
+										},
+									];
+									let btn = {};
+									let nowTime = '';
+									buttonArr.forEach((v, i) => {
+										let button = widget.createButton()
+										button.attr('title', v.text)
+											.addClass("my2")
+											.text(v.text)
+
+										if (v.text == '15min') {
+											button.css({
+												'color': '#218bde',
+												'border-bottom': '1px solid #218bde'
+											})
+											localStorage.setItem('tim', '15min') //默认为1分钟
+											localStorage.setItem('type', '15min') //默认为1分钟
+										}
+										btn = button.on("click", function(e) {
+											$(this).parents(".left").children().find(".my2").removeAttr("style"); //去掉1分钟的
+											handleClick(e, v.value, v.type);
+
+											widget.chart().setChartType(v.chartType); //改变K线类型
+										});
+
+
+									});
+									if (localStorage.getItem('tim') == '1min') {
+										widget.chart().setChartType(1);
+									}
+									let handleClick = (e, value, type) => {
+										_this.setSymbol = function(symbol, value) {
+											gh.chart().setSymbol(symbol, value);
+										};
+										localStorage.setItem('tim', value);
+										localStorage.setItem('type', type) //默认为1分钟
+										widget.chart().setResolution(value, function onReadyCallback() {}); //改变分辨率
+
+										$(e.target)
+											.addClass("mydate")
+											.closest("div.space-single")
+											.siblings("div.space-single")
+											.find("div.button")
+											.removeClass("mydate")
+									};
+									
+								});
+								
+								
+									_this.widget = widget;
+								
+								
+								
+							})
+						},
+						createFeed() {
+							let this_vue = this;							
+							let Datafeed = {};
+							
+							Datafeed.DataPulseUpdater = function(datafeed, updateFrequency) {
+								this._datafeed = datafeed;
+								this._subscribers = {};
+
+								this._requestsPending = 0;
+								var that = this;
+								
+								var update = function() {
+									if (that._requestsPending > 0) {
+										return;
+									}
+
+									for (var listenerGUID in that._subscribers) {
+										var subscriptionRecord = that._subscribers[listenerGUID];
+										var resolution = subscriptionRecord.resolution;
+
+										var datesRangeRight = parseInt((new Date().valueOf()) / 1000);
+
+
+										//	BEWARE: please note we really need 2 bars, not the only last one
+										//	see the explanation below. `10` is the `large enough` value to work around holidays
+										var datesRangeLeft = datesRangeRight - that.periodLengthSeconds(resolution, 10);
+
+										that._requestsPending++;
+
+										(function(_subscriptionRecord) { // eslint-disable-line
+											that._datafeed.getBars(_subscriptionRecord.symbolInfo, resolution, datesRangeLeft, datesRangeRight,
+												function(bars) {
+													
+													that._requestsPending--;
+
+													//	means the subscription was cancelled while waiting for data
+													if (!that._subscribers.hasOwnProperty(listenerGUID)) {
+														return;
+													}
+
+													if (bars.length === 0) {
+														return;
+													}
+
+													var lastBar = bars[bars.length - 1];
+													// if (!isNaN(_subscriptionRecord.lastBarTime) && lastBar.time < _subscriptionRecord.lastBarTime) {
+													// 	return;
+													// }
+
+													var subscribers = _subscriptionRecord.listeners;
+
+													//	BEWARE: this one isn't working when first update comes and this update makes a new bar. In this case
+													//	_subscriptionRecord.lastBarTime = NaN
+													// var isNewBar = !isNaN(_subscriptionRecord.lastBarTime) && lastBar.time > _subscriptionRecord.lastBarTime;
+
+													//	Pulse updating may miss some trades data (ie, if pulse period = 10 secods and new bar is started 5 seconds later after the last update, the
+													//	old bar's last 5 seconds trades will be lost). Thus, at fist we should broadcast old bar updates when it's ready.
+													if (isNewBar) {
+														if (bars.length < 2) {
+															throw new Error('Not enough bars in history for proper pulse update. Need at least 2.');
+														}
+
+														var previousBar = bars[bars.length - 2];
+														for (var i = 0; i < subscribers.length; ++i) {
+															subscribers[i](previousBar);
+														}
+													}
+
+													_subscriptionRecord.lastBarTime = lastBar.time;
+
+													for (var i = 0; i < subscribers.length; ++i) {
+														subscribers[i](lastBar);
+													}
+												},
+
+												//	on error
+												function() {
+													that._requestsPending--;
+												});
+										})(subscriptionRecord);
+									}
+								};
+
+								
+								if (typeof updateFrequency != 'undefined' && updateFrequency > 0) {
+									setInterval(()=>{
+										update, updateFrequency
+									},3000);
+								}
+							};
+
+							Datafeed.DataPulseUpdater.prototype.periodLengthSeconds = function(resolution, requiredPeriodsCount) {
+								var daysCount = 0;
+								if (resolution === 'D') {
+									daysCount = requiredPeriodsCount;
+								} else if (resolution === 'M') {
+									daysCount = 31 * requiredPeriodsCount;
+								} else if (resolution === 'W') {
+									daysCount = 7 * requiredPeriodsCount;
+								} else {
+									daysCount = requiredPeriodsCount * resolution / (24 * 60);
+								}
+
+								return daysCount * 24 * 60 * 60;
+							};
+
+							Datafeed.DataPulseUpdater.prototype.subscribeDataListener = function(symbolInfo, resolution, newDataCallback,
+								listenerGUID) {
+								this._datafeed._logMessage('Subscribing ' + listenerGUID);
+
+								if (!this._subscribers.hasOwnProperty(listenerGUID)) {
+									this._subscribers[listenerGUID] = {
+										symbolInfo: symbolInfo,
+										resolution: resolution,
+										lastBarTime: NaN,
+										listeners: []
+									};
+								}
+
+								this._subscribers[listenerGUID].listeners.push(newDataCallback);
+							};
+
+							Datafeed.DataPulseUpdater.prototype.unsubscribeDataListener = function(listenerGUID) {
+								this._datafeed._logMessage('Unsubscribing ' + listenerGUID);
+								delete this._subscribers[listenerGUID];
+							};
+
+							Datafeed.Container = function(updateFrequency) {
+								this._configuration = {
+									supports_search: false,
+									supports_group_request: false,
+									supported_resolutions: ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', '1D', '3D', '1W',
+										'1M'
+									],
+									supports_marks: true,
+									supports_timescale_marks: true,
+									exchanges: ['gh']
+								};
+
+								this._barsPulseUpdater = new Datafeed.DataPulseUpdater(this, updateFrequency || 10 * 1000);
+								// this._quotesPulseUpdater = new Datafeed.QuotesPulseUpdater(this);
+
+								this._enableLogging = true;
+								this._callbacks = {};
+
+								this._initializationFinished = true;
+								this._fireEvent('initialized');
+								this._fireEvent('configuration_ready');
+							};
+
+							Datafeed.Container.prototype._fireEvent = function(event, argument) {
+								if (this._callbacks.hasOwnProperty(event)) {
+									var callbacksChain = this._callbacks[event];
+									for (var i = 0; i < callbacksChain.length; ++i) {
+										callbacksChain[i](argument);
+									}
+
+									this._callbacks[event] = [];
+								}
+							};
+
+							Datafeed.Container.prototype._logMessage = function(message) {
+								if (this._enableLogging) {
+									var now = new Date();
+								}
+							};
+
+							Datafeed.Container.prototype.on = function(event, callback) {
+								if (!this._callbacks.hasOwnProperty(event)) {
+									this._callbacks[event] = [];
+								}
+
+								this._callbacks[event].push(callback);
+								return this;
+							};
+
+							Datafeed.Container.prototype.onReady = function(callback) {
+								let that = this;
+								if (this._configuration) {
+									setTimeout(function() {
+										callback(that._configuration);
+									}, 0);
+								} else {
+									this.on('configuration_ready', function() {
+										callback(that._configuration);
+									});
+								}
+							};
+
+							Datafeed.Container.prototype.resolveSymbol = function(symbolName, onSymbolResolvedCallback,
+								onResolveErrorCallback) {
+								this._logMessage("GOWNO :: resolve symbol " + symbolName);
+								Promise.resolve().then(() => {
+
+
+									// this._logMessage("GOWNO :: onResultReady inject "+'AAPL');
+									onSymbolResolvedCallback({
+										"name": this_vue.symbol,
+										"timezone": "Asia/Shanghai",
+										"pricescale": this_vue.priceScale,
+										"minmov": 1, //minmov(最小波动), pricescale(价格精度), minmove2, fractional(分数)
+										"minmov2": 0, //这是一个神奇的数字来格式化复杂情况下的价格。
+										"ticker": this_vue.symbol,
+										"description": "",
+										"type": "bitcoin",
+										"volume_precision": 8,
+										// "exchange-traded": "sdt",
+										// "exchange-listed": "sdt",
+										//现在，这两个字段都为某个交易所的略称。将被显示在图表的图例中，以表示此商品。目前此字段不用于其他目的。
+										"has_intraday": true,
+										"has_weekly_and_monthly": true,
+										"has_no_volume": false, //布尔表示商品是否拥有成交量数据。
+										'session': '24x7',
+										'supported_resolutions': [ '1', '3', '5', '15','30', '60', '120', '240', '360', '720', '1D', '3D',
+											'1W',
+											'1M'
+										]
+
+									});
+								})
+							};
+
+
+							//初始化数据
+							
+								Datafeed.Container.prototype.getBars = function(symbolInfo, resolution, rangeStartDate, rangeEndDate,
+									onHistoryCallback, onErrorCallback) {
+									// if (rangeStartDate > 0 && (rangeStartDate + '').length > 10) {
+									//   throw new Error(['Got a JS time instead of Unix one.', rangeStartDate, rangeEndDate]);
+									// }
+									// console.log(this.interval)
+									if(this.interval == undefined){
+										resolution = "15";
+										this.interval = 1;
+									}else{
+										this.interval = 1;
+									}
+								  
+								
+									if (resolution.indexOf('D') == -1 && resolution.indexOf('W') == -1 && resolution.indexOf('M') == -1) {
+										resolution = resolution + 'min'
+									} else if (resolution.indexOf('W') != -1 || resolution.indexOf('M') != -1) {
+										resolution = resolution
+									}
+									
+								
+									if(resolution == '1min'){
+										this_vue.interval = 1;
+									}
+									if(resolution == '5min'){
+										this_vue.interval = 5;
+									}
+									if(resolution == '15min'){
+										this_vue.interval = 15;
+									}
+									if(resolution == '30min'){
+										this_vue.interval = 30;
+									}
+									if(resolution == '60min'){
+										this_vue.interval = 60;
+									}
+									if(resolution == '1D'){
+										this_vue.interval = 'd';
+									}
+									
+									$.ajax({
+										url: this_vue.url + 'api/home/getkdata',
+										data:{
+											pid:this_vue.legal_id,
+											num:500,
+											interval:this_vue.interval
+										},
+										type: 'post',
+										success: function(res) {
+											var newdata = res.data;
+											if (res.code == 200) {
+												newdata.items.forEach((item, i) => {
+													item.open = Number(item.open)
+													item.close = Number(item.close)
+													item.high = Number(item.high)
+													item.low = Number(item.low)
+													item.period = resolution
+													item.time = item.nowtime * 1000
+													item.vol = Number(item.high)
+													item.volume = Number(Math.abs(item.open - item.close))
+													console.log(item)
+												})
+												this_vue.newprice = newdata.topdata.now;
+												this_vue.updown = newdata.topdata.open;
+												this_vue.minprice = newdata.topdata.lowest;
+												this_vue.maxprice = newdata.topdata.highest;
+												this_vue.dayvom = newdata.topdata.close;
+												this_vue.linestate = newdata.topdata.state;
+																						
+												onHistoryCallback(newdata.items, {
+													noData: false
+												})
+												
+												onHistoryCallback([], {
+													noData: true
+												})
+												
+											}
+											if (!res.data || res.code == -1) {
+												onHistoryCallback([], {
+													noData: true
+												})
+											}
+											if (res.data && res.data.length == 0) {
+												onHistoryCallback([], {
+													noData: true
+												})
+											}
+									
+										}
+									})
+									
+									
+								};
+							
+							
+							//实时数据
+							Datafeed.Container.prototype.subscribeBars = function(symbolInfo, resolution, onRealtimeCallback,
+								listenerGUID,
+								onResetCacheNeededCallback) {
+									
+								this_vue.connect(onRealtimeCallback)
+								
+								//this._barsPulseUpdater.subscribeDataListener(symbolInfo, resolution, onRealtimeCallback, listenerGUID, onResetCacheNeededCallback);
+							};
+
+							Datafeed.Container.prototype.unsubscribeBars = function(listenerGUID) {
+
+								this._barsPulseUpdater.unsubscribeDataListener(listenerGUID);
+
+							};
+							return new Datafeed.Container;
+						},
+
+						updateWidget(item) {
+							console.log('update')
+							this.symbolInfo = {
+								name: item,
+								ticker: item,
+								description: "",
+								session: "24x7",
+								supported_resolutions: ['1', '5', '30', '60', '240', '1D', '3D', '1W', '1M'],
+								has_intraday: true,
+								has_daily: true,
+								has_weekly_and_monthly: true,
+								timezone: "UTC",
+							}
+							this.removeWidget();
+							this.createWidget();
+						},
+						removeWidget() {
+							if (this.widget) {
+								this.widget.remove();
+								this.widget = null;
+							}
+						},
+						overrides() {
+							let style = {
+								up: "#02C289",
+								down: "#e86d43",
+								bg: "#131f30",
+								grid: "#1E2740",
+								cross: "#1E2740",
+								border: "#4e5b85",
+								text: "#61688A",
+								areatop: "rgba(122, 152, 247, .1)",
+								areadown: "rgba(122, 152, 247, .02)"
+							};
+							return {
+								'volumePaneSize': "small", //large, medium, small, tiny
+								'paneProperties.topMargin': '20',
+								"scalesProperties.lineColor": style.bg,
+								"scalesProperties.textColor": style.text,
+								"paneProperties.background": style.bg, //改变背景色的重要代码
+								"paneProperties.vertGridProperties.color": style.grid,
+								"paneProperties.horzGridProperties.color": style.grid,
+								"paneProperties.crossHairProperties.color": style.cross,
+								"paneProperties.legendProperties.showLegend": true,
+								"paneProperties.legendProperties.showStudyArguments": true,
+								"paneProperties.legendProperties.showStudyTitles": true,
+								"paneProperties.legendProperties.showStudyValues": true,
+								"paneProperties.legendProperties.showSeriesTitle": true,
+								"paneProperties.legendProperties.showSeriesOHLC": true,
+								"mainSeriesProperties.candleStyle.upColor": style.up,
+								"mainSeriesProperties.candleStyle.downColor": style.down,
+								"mainSeriesProperties.candleStyle.drawWick": true,
+								"mainSeriesProperties.candleStyle.drawBorder": true,
+								"mainSeriesProperties.candleStyle.borderColor": style.border,
+								"mainSeriesProperties.candleStyle.borderUpColor": style.up,
+								"mainSeriesProperties.candleStyle.borderDownColor": style.down,
+								"mainSeriesProperties.candleStyle.wickUpColor": style.up,
+								"mainSeriesProperties.candleStyle.wickDownColor": style.down,
+								"mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
+								"mainSeriesProperties.hollowCandleStyle.upColor": style.up,
+								"mainSeriesProperties.hollowCandleStyle.downColor": style.down,
+
+								"mainSeriesProperties.hollowCandleStyle.drawWick": true,
+								"mainSeriesProperties.hollowCandleStyle.drawBorder": true,
+								"mainSeriesProperties.hollowCandleStyle.borderColor": style.border,
+								"mainSeriesProperties.hollowCandleStyle.borderUpColor": style.up,
+								"mainSeriesProperties.hollowCandleStyle.borderDownColor": style.down,
+								"mainSeriesProperties.hollowCandleStyle.wickColor": style.line,
+								"mainSeriesProperties.haStyle.upColor": style.up,
+								"mainSeriesProperties.haStyle.downColor": style.down,
+								"mainSeriesProperties.haStyle.drawWick": true,
+								"mainSeriesProperties.haStyle.drawBorder": true,
+								"mainSeriesProperties.haStyle.borderColor": style.border,
+								"mainSeriesProperties.haStyle.borderUpColor": style.up,
+								"mainSeriesProperties.haStyle.borderDownColor": style.down,
+								"mainSeriesProperties.haStyle.wickColor": style.border,
+								"mainSeriesProperties.haStyle.barColorsOnPrevClose": false,
+								"mainSeriesProperties.barStyle.upColor": style.up,
+								"mainSeriesProperties.barStyle.downColor": style.down,
+								"mainSeriesProperties.barStyle.barColorsOnPrevClose": false,
+								"mainSeriesProperties.barStyle.dontDrawOpen": false,
+								"mainSeriesProperties.lineStyle.color": style.border,
+								"mainSeriesProperties.lineStyle.linewidth": 1,
+								"mainSeriesProperties.lineStyle.priceSource": "close",
+								"mainSeriesProperties.areaStyle.color1": style.areatop,
+								"mainSeriesProperties.areaStyle.color2": style.areadown,
+								"mainSeriesProperties.areaStyle.linecolor": style.borders,
+								"mainSeriesProperties.areaStyle.linewidth": 1,
+								"mainSeriesProperties.areaStyle.priceSource": "close"
+							}
+						},
+						chose() {
+							this.widget.setLanguage('en') //设置语言
+						}
+					},
+				})
+			})
+		</script>
+	</body>
+
+</html>
+
+		
+<style lang='scss' scoped>
+.big {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  font-family: Gadugi;
+  color: #c3231c;
+  text-align: center;
+}
+
+.bigs {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-family: Gadugi;
+  text-align: center;
+}
+
+.time-graph {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  // background-color: pink;
+}
+
+
+#big-graph-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  transform: translate(-50%, -50%);
+  height: 100px;
+}
+
+
+.time{font-size:30px;margin: 5px 0;}
+.price{font-size:12px;color:#666;margin-bottom: 3px;}
+.newprice{font-size:12px;color:#c3231c;}
+.sybol{text-align: center;
+    border-bottom: 1px solid #404040;
+    color: #c3231c;
+    font-weight: bold;}
+.dao{font-size: 12px;
+    text-align: center;border-top: 1px solid #404040;}
+.daotop{color:#666;}
+.daodetail{margin-top: 5px;}
+.continue{width: 100%;background: #c3231c;padding: 8px 0;text-align: center;border-radius: 5px;}
+.daoul li{border-right: 1px solid #404040;}
+.daoul li:last-child{border:none;}
+
+.redcolor{color:#c3231c;}
+.greencolor{color:#068860;}
+
+
+
+
+</style>
+		
+		
+		
+		
+		
+		
+	

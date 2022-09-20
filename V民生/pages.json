@@ -1,0 +1,500 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle"
+					}
+				},
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
+			"path": "pages/legal/storeUser",
+			"style": {
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/ieo/index",
+			"style": {
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/ieo/link",
+			"style": {
+				
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/ieo/log",
+			"style": {
+				"navigationBarTitleText": "认购列表",
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/ieo/detail",
+			"style": {
+				"navigationStyle": "custom"
+				
+			}
+		},
+		{
+			"path": "pages/lockming/index",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/lockming/list",
+			"style": {
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/trade/detail",
+			"style": {
+				"navigationBarTitleText": "交易历史",
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/mine/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"backgroundColor": "#102030"
+			}
+		},
+		{
+			"path": "pages/trade/trade",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/trade/entrust",
+			"style": {
+				"navigationBarTitleText": "持仓",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/lever/lever",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/lever/leverList",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/lever/orderList",
+			"style": {
+				"navigationBarTitleText": "全部委托",
+				"backgroundColor": "#102030",
+				"app-plus": {
+
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/legal",
+			"style": {
+				"navigationBarTitleText": "法币"
+			}
+		},
+		{
+			"path": "pages/legal/store",
+			"style": {
+				"navigationBarTitleText": "我的店铺"
+			}
+		},
+		{
+			"path": "pages/legal/storeDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd"
+				// "app-plus":{
+				// 	"titleNView":{
+				// 		"buttons":[{
+				// 			"text":"记录",
+				// 			"color":"#999999",
+				// 			"float":"right",
+				// 			"fontSize":"12",
+				// 			"width":"70px"
+				// 		}]
+				// 	}
+				// }
+			}
+		},
+		{
+			"path": "pages/legal/transactionRecord",
+			"style": {
+				"navigationBarTitleText": "余额日志"
+			}
+		},
+		{
+			"path": "pages/legal/transfer",
+			"style": {
+				"navigationBarTitleText": "划转"
+			}
+		},
+		{
+			"path": "pages/legal/storeOrder",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/orderDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/order",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/recordlist",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/mine/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/mine/setPwd",
+			"style": {
+				"navigationBarTitleText": "设置密码"
+			}
+		},
+		{
+			"path": "pages/mine/modifyPwd",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/market/market",
+			"style": {
+				"navigationBarTitleText": "行情",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/market/kline",
+			"style": {
+				"navigationBarBackgroundColor": "#102030",
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/market/second",
+			"style": {
+				"navigationBarBackgroundColor": "#102030",
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/home/news",
+			"style": {
+				"navigationBarTitleText": "新闻中心"
+			}
+		},
+		{
+			"path": "pages/home/ping",
+			"style": {
+				"navigationBarTitleText": "信用评分"
+			}
+		},
+		{
+			"path": "pages/home/newsDetail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		{
+			"path": "pages/mine/forgetPwd",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/mine/forgetPwdNext",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/assets/assets",
+			"style": {
+				"navigationBarTitleText": "资产",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/mine/userCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/assets/tradeAccount",
+			"style": {
+				"navigationBarTitleText": "交易账户",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/charge",
+			"style": {
+				"navigationBarTitleText": "充币",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/bankcharge",
+			"style": {
+				"navigationBarTitleText": "充币",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/chargedone",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/mention",
+			"style": {
+				"navigationBarTitleText": "提币",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mine/collect_money",
+			"style": {
+				"navigationBarTitleText": "收款信息"
+			}
+		},
+		{
+			"path": "pages/mine/card",
+			"style": {
+				
+			}
+		},
+		{
+			"path": "pages/assets/assetsIncome",
+			"style": {
+				
+			}
+		},
+		{
+			"path": "pages/mine/invite",
+			"style": {
+				"navigationBarTitleText": "我的推广码"
+				// // "navigationStyle" : "custom",
+				// "app-plus":{
+				// 	"titleNView":false
+				// }
+			}
+		},
+		{
+			"path": "pages/mine/security",
+			"style": {
+				
+			}
+		},
+		{
+			"path": "pages/mine/resetLegalPwd",
+			"style": {
+				
+			}
+		},
+		{
+			"path": "pages/mine/modifyPwdNext",
+			"style": {
+				
+			}
+		},
+		{
+			"path": "pages/mine/real_authentication",
+			"style": {
+			
+			}
+		},
+		{
+			"path": "pages/assets/transfer",
+			"style": {
+			
+				"enablePullDownRefresh": true
+			}
+		},
+
+		{
+			"path": "pages/mine/kefu",
+			"style": {
+				
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/zhibo/zhibo",
+			"style": {
+				
+				"enablePullDownRefresh": true
+			}
+		}
+
+	    ,{
+            "path" : "pages/sell/sell",
+            "style" :                                                                                    
+            {
+             
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+            "path" : "pages/sell/log",
+            "style" :                                                                                    
+            {
+               
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "民生证券",
+		"navigationBarBackgroundColor": "#102030",
+		"backgroundColorTop": "#102030",
+		// "backgroundColor": "#061623",
+		"backgroundTextStyle": "dark"
+	},
+	"tabBar": {
+		"color": "#a2a6a5",
+		"selectedColor": "#1881d2",
+		// "borderStyle" : "#eeeeee",
+		"backgroundColor": "#16263E",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/footer/index0.png",
+				"selectedIconPath": "static/footer/index1.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/market/market",
+				"iconPath": "static/footer/hang0.png",
+				"selectedIconPath": "static/footer/hang1.png",
+				"text": "行情"
+			},
+			
+			{
+				"pagePath": "pages/trade/entrust",
+				"iconPath": "static/footer/gang0.png",
+				"selectedIconPath": "static/footer/gang1.png",
+				"text": "持仓"
+			},
+			{
+				"pagePath": "pages/mine/kefu",
+				"iconPath": "static/footer/trade0.png",
+				"selectedIconPath": "static/footer/trade1.png",
+				"text": "客服"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"iconPath": "static/footer/mine0.png",
+				"selectedIconPath": "static/footer/mine1.png",
+				"text": "我的"
+			}
+			
+		]
+	}
+}

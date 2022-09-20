@@ -1,0 +1,1072 @@
+body {
+  font-size: 28upx;
+}
+.light {
+  min-height: 100vh;
+  background: #F7F7FB !important;
+  color: #0D1721;
+  overflow-x: hidden;
+  /* color字体颜色 */
+  /* 背景色 */
+  /* 边框颜色 */
+  /* margin外边距 */
+  /* padding内边距 */
+  /* 宽度百分比 */
+  /* 宽度upx */
+  /* 高度 */
+  /* 行高 */
+  /* 边框圆角 */
+  /* 透明度 */
+  /* 三角形 */
+  /* 字体渐变 */
+  /* 去除chrome input默认背景 */
+  /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+  /* 不换行超出隐藏 */
+  /* 其它 */
+  /* 下划线 */
+}
+.light input {
+  border: 0;
+  outline: 0;
+  /* font-weight: bold; */
+  color: #000;
+}
+.light ::-webkit-input-placeholder {
+  color: #CED6DB;
+}
+.light .b7c {
+  color: #b7c7dc;
+}
+.light .gray75 {
+  color: #363a40;
+}
+.light .blue21 {
+  color: #217dc1;
+}
+.light .gary0 {
+  color: #000;
+}
+.light .gray91 {
+  color: #9195a1;
+}
+.light .garyd {
+  color: #DDDEDE;
+}
+.light .white {
+  color: #fff;
+}
+.light .nwhite{
+	color: #0D1721;
+}
+.light .gray {
+  color: #8689B2;
+}
+.light .gray_e {
+  color: #0D1721;
+}
+.light .gray9 {
+  color: #999;
+}
+.light .gray7 {
+  color: #7286a5;
+}
+.light .gray6 {
+  color: #666;
+}
+.light .gray5 {
+  color: #5b6c87;
+}
+.light .gray3 {
+  color: #333;
+}
+.light .gray4 {
+  color: #aeb6bb;
+}
+.light .gray45 {
+  color: #454545;
+}
+.light .blue {
+  color: #6d808e;
+}
+.light .blue2 {
+  color: #1881d2;
+}
+.light .blue3 {
+  color: #4A5A7A;
+}
+.light .blue4 {
+  color: #8897AD;
+}
+.light .red {
+  color: #e27046;
+}
+.light .red2 {
+  color: #ff5f56;
+}
+.light .redColor {
+  color: #d74e5a;
+}
+.light .greenColor {
+  color: #12b886;
+}
+.light .blueColor {
+  color: #3d80ce;
+}
+.light .yellow {
+  color: #FFB103;
+}
+.light .green {
+  color: #02c289;
+}
+.light .purpel {
+  color: #6c2fd3;
+}
+.light .chengse {
+  color: #cc704b;
+}
+.light .color1 {
+  color: #728DAF;
+}
+.light .baseBg {
+  background: #F2F5FF;
+}
+.light .bgWhite {
+  background: white;
+}
+.light .bgRed {
+  background: #e27046 !important;
+}
+.light .bgGray {
+  background: #c7ced4;
+}
+.light .bgF3 {
+  background: #f3f3f3;
+}
+.light .bgShadow {
+  box-shadow: 0 0 10upx #e4dbdb;
+}
+.light .bgGreen {
+  background: #02c289 !important;
+}
+.light .bggray {
+  background: #F7F7FB;
+}
+.light .bgyellow {
+  background: #ff9e00;
+}
+.light .bgHeader {
+  background: #FFFFFF;
+}
+.light .bgBlue {
+  background: #1881d2;
+}
+.light .bgBlue2 {
+  background: #217dc1;
+}
+.light .bgBlue3 {
+  background: #0b53bd !important;
+}
+.light .bgred {
+  background: #d74e5a;
+}
+.light .bggreen {
+  background: #12b886;
+}
+.light .bgDark {
+  background: #2c548c;
+}
+.light .bgPart {
+  background: #162633;
+}
+.light .baseBg2 {
+  background: #E2E7EB;
+}
+.light .baseBg3 {
+  background: #44708a;
+}
+.light .bg_legal {
+  background: #fff;
+}
+.light .liner0 {
+  background: #7564EF;
+}
+.light .liner1 {
+  background: #E6762C;
+}
+.light .liner2 {
+  background: #419FF6;
+}
+.light .liner3 {
+  background: #4AAB73;
+}
+.light .liner4 {
+  background: #5977F4;
+}
+.light .bg1 {
+  background-color: #1C1734;
+}
+.light .bg2 {
+  background-color: #061623;
+}
+.light .bgPart {
+  background: #FFFFFF;
+}
+.light .bgBlack {
+  background: #e1e1ea;
+}
+.light .bgliner {
+  background: linear-gradient(to right, #5BB5EB, #508ADE);
+}
+.light .bdb_blue {
+  border-bottom: 1px solid #5D86D8;
+}
+.light .bdb_e8 {
+  border-bottom: 1px solid #e8ebee;
+}
+.light .bdbf5 {
+  border-bottom: 1px solid #f5f5f5;
+}
+.light .bdb_f3 {
+  border-bottom: 1px solid #f3f3f3;
+}
+.light .bdt_f3 {
+  border-top: 1px solid #f3f3f3;
+}
+.light .bd_blue2 {
+  border: 1px solid #71AED3;
+}
+.light .bdb {
+  border-bottom: 1px solid #dddddd;
+}
+.light .bdb1f {
+  border-bottom: 1px solid #E2E7EB;
+}
+.light .bdb_yellow {
+  border-bottom: 1px solid #FFB103;
+}
+.light .bdbwhite {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.light .bdb_blue3 {
+  border-bottom: 1px solid #E2E7EB;
+}
+.light .bdb27 {
+  border-bottom: 1px solid #E2E7EB;
+}
+.light .bdb_base {
+  border-bottom: 1px solid #102000;
+}
+.light .bdr_white50 {
+  border-right: 1px solid rgba(113, 113, 113, 0.2);
+}
+.light .bd_input {
+  border: 1px solid #CED6DB;
+}
+.light .bd_red {
+  border: 1px solid #c15465;
+}
+.light .bdBlue {
+  border: 1px solid #217dc1;
+}
+.light .bd_green {
+  border: 1px solid #4daa90;
+}
+.light .bdr_input {
+  border-right: 1px solid #CED6DB;
+}
+.light .bdb_1e {
+  border-bottom: 1px solid #E2E7EB;
+}
+.light .bd3a {
+  border: 1px solid #e1e1ea;
+}
+.light .bdActive {
+  border: 1px solid #357ce1;
+}
+.light .bor1 {
+  border: 1px solid #CED6DB;
+}
+.light .bor2 {
+  border: 1px solid #1881d2;
+}
+.light .bor3 {
+  border: 1px solid #02c289 !important;
+}
+.light .bor4 {
+  border: 1px solid #e27046 !important;
+}
+.light .bor5 {
+  border-bottom: 1px solid #E2E7EB !important;
+}
+.light .bor6 {
+  border: 1px solid #e5e5e5;
+}
+.light .bdb_active {
+  border-bottom: 2px solid #3d80ce;
+}
+.light .mt5 {
+  margin-top: 10upx;
+}
+.light .mb5 {
+  margin-bottom: 10upx;
+}
+.light .ml5 {
+  margin-left: 10upx;
+}
+.light .mr5 {
+  margin-right: 10upx;
+}
+.light .mt7 {
+  margin-top: 14upx;
+}
+.light .mt10 {
+  margin-top: 20upx;
+}
+.light .mt13 {
+  margin-top: 26upx;
+}
+.light .mb10 {
+  margin-bottom: 20upx;
+}
+.light .ml10 {
+  margin-left: 20upx;
+}
+.light .mr10 {
+  margin-right: 20upx;
+}
+.light .mt15 {
+  margin-top: 30upx;
+}
+.light .mt20 {
+  margin-top: 40upx;
+}
+.light .mb20 {
+  margin-bottom: 40upx;
+}
+.light .ml20 {
+  margin-left: 40upx;
+}
+.light .mr20 {
+  margin-right: 40upx;
+}
+.light .mt30 {
+  margin-top: 60upx;
+}
+.light .mb30 {
+  margin-bottom: 60upx;
+}
+.light .ml30 {
+  margin-left: 60upx;
+}
+.light .mr30 {
+  margin-right: 60upx;
+}
+.light .mt40 {
+  margin-top: 80upx;
+}
+.light .mt45 {
+  margin-top: 90upx;
+}
+.light .mb45 {
+  margin-bottom: 90upx;
+}
+.light .ml45 {
+  margin-left: 90upx;
+}
+.light .mr45 {
+  margin-right: 90upx;
+}
+.light .mt50 {
+  margin-top: 100upx;
+}
+.light .mt75 {
+  margin-top: 150upx;
+}
+.light .mt88 {
+  margin-top: 176upx;
+}
+.light .mt100 {
+  margin-top: 200upx;
+}
+.light .mtb10 {
+  margin-top: 20upx;
+  margin-bottom: 20upx;
+}
+.light .mlr5 {
+  margin-left: 10upx;
+  margin-right: 10upx;
+}
+.light .mlr10 {
+  margin-left: 20upx;
+  margin-right: 20upx;
+}
+.light .mtb20 {
+  margin-top: 40upx;
+  margin-bottom: 40upx;
+}
+.light .mlr20 {
+  margin-left: 40upx;
+  margin-right: 40upx;
+}
+.light .mtb30 {
+  margin-top: 60upx;
+  margin-bottom: 60upx;
+}
+.light .mlr30 {
+  margin-left: 60upx;
+  margin-right: 60upx;
+}
+.light .mtb45 {
+  margin-top: 90upx;
+  margin-bottom: 90upx;
+}
+.light .mlr45 {
+  margin-left: 90upx;
+  margin-right: 90upx;
+}
+.light .ptb {
+  padding-top: 176upx;
+  padding-bottom: 200upx;
+}
+.light .pt5 {
+  padding-top: 10upx;
+}
+.light .pb5 {
+  padding-bottom: 10upx;
+}
+.light .pl5 {
+  padding-left: 10upx;
+}
+.light .pr5 {
+  padding-right: 10upx;
+}
+.light .pt10 {
+  padding-top: 20upx;
+}
+.light .pl10 {
+  padding-left: 20upx;
+}
+.light .pr10 {
+  padding-right: 20upx;
+}
+.light .pb10 {
+  padding-bottom: 20upx;
+}
+.light .pl15 {
+  padding-left: 30upx;
+}
+.light .pr15 {
+  padding-right: 30upx;
+}
+.light .pb15 {
+  padding-bottom: 30upx;
+}
+.light .pt20 {
+  padding-top: 40upx;
+}
+.light .pb20 {
+  padding-bottom: 40upx;
+}
+.light .pl20 {
+  padding-left: 40upx;
+}
+.light .pr20 {
+  padding-right: 40upx;
+}
+.light .pl30 {
+  padding-left: 60upx;
+}
+.light .pr30 {
+  padding-right: 60upx;
+}
+.light .pt30 {
+  padding-top: 60upx;
+}
+.light .pb30 {
+  padding-bottom: 60upx;
+}
+.light .pl40 {
+  padding-left: 80upx;
+}
+.light .pr40 {
+  padding-right: 80upx;
+}
+.light .pt40 {
+  padding-top: 80upx;
+}
+.light .pb40 {
+  padding-bottom: 80upx;
+}
+.light .pt45 {
+  padding-top: 90upx;
+}
+.light .pb45 {
+  padding-bottom: 90upx;
+}
+.light .pt50 {
+  padding-top: 100upx;
+}
+.light .pb50 {
+  padding-bottom: 100upx;
+}
+.light .pl50 {
+  padding-left: 100upx;
+}
+.light .pr50 {
+  padding-right: 100upx;
+}
+.light .pt60 {
+  padding-top: 120upx;
+}
+.light .pb60 {
+  padding-bottom: 120upx;
+}
+.light .pt88 {
+  padding-top: 176upx;
+}
+.light .pb100 {
+  padding-bottom: 200upx;
+}
+.light .pb150 {
+  padding-bottom: 300upx;
+}
+.light .pt100 {
+  padding-top: 200upx;
+}
+.light .ptb5 {
+  padding-bottom: 10upx;
+  padding-top: 10upx;
+}
+.light .ptb8 {
+  padding-bottom: 16upx;
+  padding-top: 16upx;
+}
+.light .plr8 {
+  padding-left: 16upx;
+  padding-right: 16upx;
+}
+.light .ptb10 {
+  padding-bottom: 20upx;
+  padding-top: 20upx;
+}
+.light .plr10 {
+  padding-left: 20upx;
+  padding-right: 20upx;
+}
+.light .ptb15 {
+  padding-top: 30upx;
+  padding-bottom: 30upx;
+}
+.light .plr15 {
+  padding-left: 30upx;
+  padding-right: 30upx;
+}
+.light .plr20 {
+  padding-left: 40upx;
+  padding-right: 40upx;
+}
+.light .ptb20 {
+  padding-top: 40upx;
+  padding-bottom: 40upx;
+}
+.light .plr30 {
+  padding-left: 60upx;
+  padding-right: 60upx;
+}
+.light .ptb30 {
+  padding-top: 60upx;
+  padding-bottom: 60upx;
+}
+.light .plr40 {
+  padding-left: 80upx;
+  padding-right: 80upx;
+}
+.light .ptb40 {
+  padding-top: 80upx;
+  padding-bottom: 80upx;
+}
+.light .ptb45 {
+  padding-top: 90upx;
+  padding-bottom: 90upx;
+}
+.light .plr45 {
+  padding-left: 90upx;
+  padding-right: 90upx;
+}
+.light .plr50 {
+  padding-left: 100upx;
+  padding-right: 100upx;
+}
+.light .ptb50 {
+  padding-bottom: 100upx;
+  padding-top: 100upx;
+}
+.light .ptb60 {
+  padding-bottom: 120upx;
+  padding-top: 120upx;
+}
+.light .w20 {
+  width: 20%;
+}
+.light .w25 {
+  width: 25%;
+}
+.light .w30 {
+  width: 30%;
+}
+.light .w35 {
+  width: 35%;
+}
+.light .w40 {
+  width: 40%;
+}
+.light .w45 {
+  width: 45%;
+}
+.light .w48 {
+  width: 48%;
+}
+.light .w50 {
+  width: 50%;
+}
+.light .w65 {
+  width: 65%;
+}
+.light .w75 {
+  width: 75%;
+}
+.light .w80 {
+  width: 80%;
+}
+.light .w85 {
+  width: 85%;
+}
+.light .w90 {
+  width: 90%;
+}
+.light .w95 {
+  width: 95%;
+}
+.light .w100 {
+  width: 100%;
+}
+.light .wt5 {
+  width: 10upx;
+}
+.light .wt8 {
+  width: 16upx;
+}
+.light .wt10 {
+  width: 20upx;
+}
+.light .wt12 {
+  width: 24upx;
+}
+.light .wt15 {
+  width: 30upx;
+}
+.light .wt18 {
+  width: 36upx;
+}
+.light .wt20 {
+  width: 40upx;
+}
+.light .wt25 {
+  width: 50upx;
+}
+.light .wt30 {
+  width: 60upx;
+}
+.light .wt35 {
+  width: 70upx;
+}
+.light .wt40 {
+  width: 80upx;
+}
+.light .wt50 {
+  width: 100upx;
+}
+.light .wt60 {
+  width: 120upx;
+}
+.light .wt70 {
+  width: 140upx;
+}
+.light .wt80 {
+  width: 160upx;
+}
+.light .wt90 {
+  width: 180upx;
+}
+.light .wt100 {
+  width: 200upx;
+}
+.light .w120 {
+  width: 240upx;
+}
+.light .w150 {
+  width: 300upx;
+}
+.light .w160 {
+  width: 320upx;
+}
+.light .w180 {
+  width: 360upx;
+}
+.light .h5 {
+  height: 10upx;
+}
+.light .h8 {
+  height: 16upx;
+}
+.light .h10 {
+  height: 20upx;
+}
+.light .h12 {
+  height: 24upx;
+}
+.light .h15 {
+  height: 30upx;
+}
+.light .h18 {
+  height: 36upx;
+}
+.light .h20 {
+  height: 40upx;
+}
+.light .h25 {
+  height: 50upx;
+}
+.light .h30 {
+  height: 60upx;
+}
+.light .h35 {
+  height: 70upx;
+}
+.light .h40 {
+  height: 80upx;
+}
+.light .h44 {
+  height: 88upx;
+}
+.light .h50 {
+  height: 100upx;
+}
+.light .h60 {
+  height: 120upx;
+}
+.light .h70 {
+  height: 140upx;
+}
+.light .h88 {
+  height: 176upx;
+}
+.light .h80 {
+  height: 160upx;
+}
+.light .h90 {
+  height: 180upx;
+}
+.light .h100 {
+  height: 200upx;
+}
+.light .h110 {
+  height: 220upx;
+}
+.light .h120 {
+  height: 240upx;
+}
+.light .h130 {
+  height: 260upx;
+}
+.light .h160 {
+  height: 320upx;
+}
+.light .h260 {
+  height: 520upx;
+}
+.light .h280 {
+  height: 560upx;
+}
+.light .h390 {
+  height: 780upx;
+}
+.light .ht100 {
+  height: 100%;
+}
+.light .lh10 {
+  line-height: 20upx;
+}
+.light .lh20 {
+  line-height: 40upx;
+}
+.light .lh25 {
+  line-height: 50upx;
+}
+.light .lh30 {
+  line-height: 60upx;
+}
+.light .lh35 {
+  line-height: 70upx;
+}
+.light .lh40 {
+  line-height: 80upx;
+}
+.light .lh44 {
+  line-height: 88upx;
+}
+.light .lh50 {
+  line-height: 100upx;
+}
+.light .lh56 {
+  line-height: 112upx;
+}
+.light .lh60 {
+  line-height: 120upx;
+}
+.light .hg20 {
+  height: 20%;
+}
+.light .lh88 {
+  line-height: 176upx;
+}
+.light .radius2 {
+  border-radius: 4upx;
+}
+.light .radius4 {
+  border-radius: 8upx;
+}
+.light .radius6 {
+  border-radius: 12upx;
+}
+.light .radius10 {
+  border-radius: 20upx;
+}
+.light .radius15 {
+  border-radius: 30upx;
+}
+.light .radius20 {
+  border-radius: 40upx;
+}
+.light .radius28 {
+  border-radius: 56upx;
+}
+.light .radius50p {
+  border-radius: 50%;
+}
+.light .rat4 {
+  border-top-left-radius: 16upx;
+  border-top-right-radius: 16upx;
+}
+.light .opt0 {
+  opacity: 0;
+}
+.light .opt88 {
+  opacity: 0.88;
+}
+.light .opt50 {
+  opacity: 0.5;
+}
+.light .opt33 {
+  opacity: 0.33;
+}
+.light .opt {
+  opacity: 0.15;
+}
+.light .trangle {
+  width: 0;
+  height: 0;
+  border-left: 60upx solid transparent;
+  border-right: 60upx solid transparent;
+  border-bottom: 20upx solid #1b2637;
+}
+.light .trangle_yellow {
+  width: 0;
+  height: 0;
+  border-left: 10upx solid transparent;
+  border-right: 10upx solid transparent;
+  border-top: 10upx solid #fec403;
+}
+.light .linerColor {
+  color: #416dff;
+  background: linear-gradient(to bottom, #416dff, #464fff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.light input:-webkit-autofill {
+  background: transparent;
+  -webkit-box-shadow: 0 0 0upx 2000upx transparent inset !important;
+}
+.light .bshadowf5 {
+  box-shadow: 0 10upx 10upx #f5f5f5, 0 -10upx 10upx #f5f5f5, 10upx 0 10upx #f5f5f5, -10upx 0 10upx #f5f5f5;
+}
+.light select {
+  border: 1px solid #eee;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  color: #666;
+}
+.light .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.light .overxy {
+  overflow: hidden;
+}
+.light .overx {
+  overflow-x: hidden;
+}
+.light .overxscroll {
+  overflow-x: scroll;
+}
+.light .load-more {
+  display: block;
+  background-color: transparent;
+  padding-top: 30upx;
+  border-radius: 8upx;
+}
+.light .btn-default {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 4upx;
+  text-align: center;
+  outline: none;
+  border: none;
+  color: #fff;
+  height: 80upx;
+  line-height: 80upx;
+  font-size: 28upx;
+}
+.light .bshadow5 {
+  box-shadow: 0 10upx 10upx #d4dbfc, 0 -10upx 10upx #d4dbfc, 10upx 0 10upx #d4dbfc, -10upx 0 10upx #d4dbfc;
+}
+.light .bshadow5_green {
+  box-shadow: 0 0 10upx #75C322;
+}
+.light .bshadowf5 {
+  box-shadow: 0 10upx 10upx #f5f5f5, 0 -10upx 10upx #f5f5f5, 10upx 0 10upx #f5f5f5, -10upx 0 10upx #f5f5f5;
+}
+.light .bshadow10 {
+  box-shadow: 0 10upx 20upx rgba(231, 233, 241, 0.6), 0 -10upx 20upx rgba(231, 233, 241, 0.6), 10upx 0 20upx rgba(231, 233, 241, 0.6), -10upx 0 20upx rgba(231, 233, 241, 0.6);
+}
+.light .copy {
+  height: 172upx;
+  line-height: 172upx;
+  border-radius: 86upx;
+}
+.light .header {
+  width: 100%;
+  top: 0;
+  /* #ifdef APP-PLUS */
+  height: 100upx;
+  top: var(--status-bar-height);
+  /* #endif */
+  left: 0;
+  z-index: 1000000;
+}
+.light .header .back {
+  display: inline-block;
+  position: absolute;
+  left: 28upx;
+  width: 16upx;
+  height: 32upx;
+  /* background: url(/static/arrow_left.png) no-repeat center / 100% 100%; */
+}
+.light .header .txt {
+  font-size: 20upx;
+}
+.light .arrow {
+  width: 12upx;
+  height: 22upx;
+}
+.light .scan {
+  width: 80upx;
+  height: 80upx;
+}
+.light .width10 {
+  width: 60upx;
+  height: 60upx;
+}
+.light .lb {
+  left: -30upx;
+  bottom: 0;
+  transform: translateY(50%);
+}
+.light .pos_r30t90 {
+  right: 30upx;
+  top: 90upx;
+}
+.light .pos_l0b0 {
+  bottom: 0;
+  left: 0;
+}
+.light .shade {
+  left: 5%;
+  bottom: 0;
+  transform: translateY(30upx);
+  border-radius: 30upx;
+  background: #79809B;
+  z-index: -1;
+}
+.light .zdx100 {
+  z-index: 100;
+}
+.light .zdx1000 {
+  z-index: 1000;
+}
+.light .my_layer {
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.light .break-word {
+  word-wrap: break-word;
+}
+.light .nowrap {
+  white-space: nowrap;
+}
+.light .myline {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40upx;
+  height: 6upx;
+  background: url(/static/line_blue.png) no-repeat left top / 100% 100%;
+}
+.light .bottom-space {
+  height: 100upx;
+}
+.light .bdb_myblue {
+  border-bottom: 1px solid #E2E7EB;
+}
+.light .ft10 {
+  font-size: 20upx;
+}
+.light .bdb2f {
+  border-bottom: 1px solid #f7f7fb;
+}
+.light .bd2f {
+  border: 1px solid #f7f7fb;
+}
+.light .bdl2f {
+  border-left: 1px solid #ccd5da;
+}
+.light .bdt2f {
+  border-top: 1px solid #f7f7fb;
+}
+.light .uni-drawer > .uni-drawer-content {
+  background: #fff !important;
+}
+.gray_e.light {
+  color: #0D1721;
+}
+.vh100 {
+  min-height: 100%;
+}
